@@ -528,7 +528,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Combined TFR + Collision Avoidance Scenario Runner")
     parser.add_argument("--data", default=None,
-        help="FlightRadar24 CSV folder")
+        help="dats CSV folder")
     parser.add_argument("--tfr", default=None,
         help="TFR_Lat_Lon.xlsx path. Omit to disable TFR avoidance.")
     parser.add_argument("--tier", default="all",

@@ -47,8 +47,7 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 # Both known spellings of the data folder are tried at runtime.
 # Override with environment variable if needed.
 _DATA_CANDIDATES = [
-    os.path.join(_HERE, "Validation data (FlightRadar24)"),
-    os.path.join(_HERE, "Validation data (FlightRader24)"),   # original typo variant
+    os.path.join(_HERE, "dats"),
 ]
 DATA_FOLDER = os.environ.get(
     "AIR_TRAFFIC_DATA_FOLDER",
@@ -459,7 +458,7 @@ def fill_gaps(df, gap_threshold_seconds=GAP_THRESHOLD_SECONDS):
 
 def load_aircraft_data(folder_path):
     """
-    DEV - Load all FlightRadar24 CSV files from folder.
+    DEV - Load all CSV files from dats folder.
 
     Task 6 (unified data loading): delegates to Group B's load_flight_data()
     so both groups use an identical loading pipeline.  The returned dict

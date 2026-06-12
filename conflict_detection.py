@@ -192,7 +192,7 @@ class ConflictDetector:
         """
         # Only consider airborne aircraft — exclude ground/taxi (altitude < 1000 ft)
         # Ground aircraft at 0 ft triggering false conflicts against low-altitude
-        # climb-out is a known data quality issue in the FlightRadar24 CSVs.
+        # climb-out is a known data quality issue in the FR24 CSVs.
         active = [a for a in aircraft_list if a.active and a.altitude >= 1000.0]
 
         if len(active) < 2:

@@ -51,8 +51,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Both spelling variants of the data folder are tried
 _DATA_CANDIDATES = [
-    os.path.join(SCRIPT_DIR, "Validation data (FlightRadar24)"),
-    os.path.join(SCRIPT_DIR, "Validation data (FlightRader24)"),
+    os.path.join(SCRIPT_DIR, "dats"),
 ]
 DATA_DIR = next((p for p in _DATA_CANDIDATES if os.path.isdir(p)), _DATA_CANDIDATES[0])
 
@@ -552,7 +551,7 @@ def make_figures(trajs, timeline_df, conflict_df,
     # ── Super-title ───────────────────────────────────────────────────────
     tfr_tag = " + TFR Overlay" if has_tfr else ""
     fig.suptitle(
-        f"Baseline Conflict Analysis{tfr_tag} — {len(trajs)} FlightRadar24 Aircraft\n"
+        f"Baseline Conflict Analysis{tfr_tag} — {len(trajs)} FR24 Aircraft\n"
         "Group A + B  |  MDP Air Traffic Simulation  |  ITSEC 2026",
         fontsize=13, fontweight="bold", y=0.98
     )
@@ -608,7 +607,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Combined baseline analysis — TFR + Collision")
     parser.add_argument("--data", default=DATA_DIR,
-                        help="FlightRadar24 CSV folder")
+                        help="dats CSV folder")
     parser.add_argument("--tfr", default=TFR_PATH_DEFAULT,
                         help="TFR_Lat_Lon.xlsx path")
     parser.add_argument("--out", default=SCRIPT_DIR,
@@ -616,7 +615,7 @@ def main():
     args = parser.parse_args()
 
     print("\n" + "=" * 62)
-    print("  Combined Baseline Analysis — FlightRadar24 + TFR")
+    print("  Combined Baseline Analysis — dats + TFR")
     print("=" * 62)
 
     trajs = load_trajectories(args.data)

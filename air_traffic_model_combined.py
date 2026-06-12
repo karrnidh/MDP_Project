@@ -89,7 +89,7 @@ class AirTrafficModelCombined(mesa.Model):
 
     Parameters
     ----------
-    data_dir    : path to FlightRadar24 CSV folder
+    data_dir    : path to dats CSV folder
     tfr_path    : path to TFR_Lat_Lon.xlsx  (pass None to disable TFR)
     mode        : 'baseline' | 'mdp_vi' | 'mdp_ql' | 'pomdp'
     time_step_s : seconds per simulation step (default 30)

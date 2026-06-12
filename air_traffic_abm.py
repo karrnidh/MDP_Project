@@ -6,7 +6,7 @@ Project: MDP Air Traffic Simulation  |  ITSEC 2026
 
 Air Traffic Agent-Based Model using Mesa
 -----------------------------------------
-Simulates real flights using FlightRadar24 trajectory data.
+Simulates real flights using FR24 trajectory data.
 
 """
 
@@ -50,7 +50,7 @@ def bearing_deg(lat1, lon1, lat2, lon2):
 
 
 def load_flight_data(data_dir: str) -> pd.DataFrame:
-    """Load and clean all CSV flight trajectory files from FlightRadar24.
+    """Load and clean all CSV flight trajectory files from the dats folder.
 
     Handles two CSV formats:
       Format A (old): combined 'Position' column → 'lat,lon' string
@@ -278,7 +278,7 @@ class AirTrafficModel(mesa.Model):
 
     Parameters
     ----------
-    data_dir    : path to folder containing FlightRadar24 CSV files
+    data_dir    : path to dats folder containing CSV files
     time_step_s : seconds per simulation step (default 30)
     mdp_mode    : False = baseline CSV replay (default)
                   True  = MDP policy controls all aircraft positions
@@ -314,7 +314,7 @@ class AirTrafficModel(mesa.Model):
             v_sep_ft = VERTICAL_SEP_FT,
         )
 
-        # ── Load FlightRadar24 data ────────────────────────────────────────────
+        # ── Load flight data from dats folder ────────────────────────────────────────────
         df = load_flight_data(data_dir)
         self.callsigns = sorted(df["Callsign"].unique())
 
