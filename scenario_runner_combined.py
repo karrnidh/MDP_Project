@@ -76,7 +76,7 @@ from mdp_collision_env import ObservationNoise
 #
 # =============================================================================
 
-SCENARIO_SIZES = (1, 5, 10, 20)   # ← change these for the paper run
+SCENARIO_SIZES = (50, 75, 90, None)   # ← change these for the paper run
 
 # Fixed seed — guarantees the same aircraft are sampled every run.
 # Change with --seed if you want a different random sample.
