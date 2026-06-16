@@ -89,7 +89,7 @@ class AirTrafficModelCombined(mesa.Model):
 
     Parameters
     ----------
-    data_dir    : path to dats CSV folder
+    data_dir    : path to FlightRadar24 CSV folder
     tfr_path    : path to TFR_Lat_Lon.xlsx  (pass None to disable TFR)
     mode        : 'baseline' | 'mdp_vi' | 'mdp_ql' | 'pomdp'
     time_step_s : seconds per simulation step (default 30)
@@ -252,17 +252,18 @@ class AirTrafficModelCombined(mesa.Model):
             print("  ! mdp.py not found; Group A solvers disabled.")
             return
 
-        # Build a stable cache key from the TFR object's vertex count + centroid
-        # (avoids storing the path string which may differ by scenario runner)
+        # Build a stable cache key from TFR geometry only — NOT mode.
+        # VI and QL solvers are identical for mdp_vi and pomdp; only the
+        # belief update layer differs. Keying by mode caused POMDP to retrain
+        # from scratch even when mdp_vi had already trained for the same TFR.
         if self.tfr is not None:
             cache_key = (
                 self.tfr.n_vertices,
                 round(self.tfr.centroid_lat, 4),
                 round(self.tfr.centroid_lon, 4),
-                self.mode,
             )
         else:
-            cache_key = (None, self.mode)
+            cache_key = (None,)
 
         if cache_key in _SOLVER_CACHE:
             vi, ql, pomdp_a = _SOLVER_CACHE[cache_key]
