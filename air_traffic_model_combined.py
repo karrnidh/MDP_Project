@@ -309,8 +309,8 @@ class AirTrafficModelCombined(mesa.Model):
                     ownship_callsign = agent.callsign,
                     max_steps        = self.max_steps,
                     noise            = noise,
-                    n_particles      = 200,
-                    n_scenarios      = 30,
+                    n_particles      = 100,
+                    n_scenarios      = 15,
                     lookahead        = 2,
                 )
             else:

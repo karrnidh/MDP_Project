@@ -64,7 +64,7 @@ TFR_POLYGON_MODE = os.environ.get("AIR_TRAFFIC_TFR_MODE", "auto").lower()
 # Simulation timing
 GAP_THRESHOLD_SECONDS  = 60
 STEP_DURATION_SECONDS  = 30
-CONFLICT_LOOKAHEAD_STEPS = 20
+CONFLICT_LOOKAHEAD_STEPS = 8
 EXTRA_ROUTE_STEPS      = 1000   # increased to give long-haul detour flights enough steps
 
 # Separation thresholds (nautical miles)
@@ -95,7 +95,7 @@ MDP_ACTIVE_TFR_NM  = 45.0
 MDP_GAMMA          = 0.97     # increased from 0.95 - agent values future rewards more
 MDP_VI_TOL         = 1e-3     # back to original tolerance - tighter was too slow
 MDP_VI_MAX_ITERS   = 500      # back to original
-MDP_T_SAMPLES      = 8        # back to 8 - 12 was the main cause of slow runtime
+MDP_T_SAMPLES      = 4        # back to 8 - 12 was the main cause of slow runtime
 
 # Q-Learning hyperparameters (Karrnidh)
 MDP_QL_EPISODES    = 25000    # increased from 15000 — ensures full state coverage

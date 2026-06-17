@@ -88,7 +88,7 @@ MDP_ACTIVE_TFR_NM       = 45.0
 SEPARATION_HARD_NM      = HORIZONTAL_SEP_NM   # 3.0
 SEPARATION_WARN_NM      = 5.0
 SEPARATION_AWARE_NM     = 10.0
-CONFLICT_LOOKAHEAD_STEPS = 20
+CONFLICT_LOOKAHEAD_STEPS = 8
 STEP_DURATION_SECONDS   = 30
 WAYPOINT_CAPTURE_NM     = 20.0
 GUIDANCE_TURN_DEG       = 20.0
@@ -248,17 +248,32 @@ class AircraftAgent(mesa.Agent):
         return lat, lon
 
     def _separation_threats(self) -> List["AircraftAgent"]:
-        """Return list of other agents that will be within SEPARATION_WARN_NM soon."""
         threats = []
+
         for other in self.model.aircraft:
+
             if other.callsign == self.callsign or not other.active:
                 continue
+
+            # Fast distance filter FIRST
+            dist = _haversine(
+                self.lat, self.lon,
+                other.lat, other.lon
+            )
+
+            if dist > 15:
+                continue
+
+            # Expensive prediction only for nearby aircraft
             for k in range(1, CONFLICT_LOOKAHEAD_STEPS + 1):
+
                 a_lat, a_lon = self._predict_position(self.heading, k)
                 b_lat, b_lon = other._predict_position(other.heading, k)
+
                 if _haversine(a_lat, a_lon, b_lat, b_lon) < SEPARATION_WARN_NM:
                     threats.append(other)
                     break
+
         return threats
 
     def _refresh_route(self):
@@ -415,6 +430,13 @@ class AircraftAgent(mesa.Agent):
                 min_tfr_dist = min(min_tfr_dist, tfr.distance_to_edge(sim_lat, sim_lon))
 
             for other in self.model.aircraft:
+                if _haversine(
+                    self.lat,
+                    self.lon,
+                    other.lat,
+                    other.lon
+                    ) > 15:
+                    continue
                 if other.callsign == self.callsign or not other.active:
                     continue
                 o_lat, o_lon = other._predict_position(other.heading, step)

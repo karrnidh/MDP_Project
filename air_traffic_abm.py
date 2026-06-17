@@ -224,7 +224,7 @@ class AircraftAgent(mesa.Agent):
             self.altitude = float(row["Altitude"])
             self.speed    = float(row["Speed"])
             self.heading  = float(row["Direction"])
-            self._check_conflicts()
+            
 
         self.phase = self._compute_phase()
 
