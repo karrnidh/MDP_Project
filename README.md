@@ -55,13 +55,13 @@ Density tiers are defined by `SCENARIO_SIZES` near the top of `scenario_runner_c
 
 Results are written to the `--out` directory (default `scenario_results_combined/`):
 
-- `summary_table.csv` — one row per tier per mode (conflicts, TFR breaches, timing, etc.)
-- `tier_sample_seedN.csv` — which callsigns were sampled into each tier
-- `{tier}_{mode}_conflicts.csv` — collision event log
-- `{tier}_{mode}_tfr_metrics.csv` — per-aircraft TFR summary
-- `{tier}_{mode}_mdp_log.csv` — per-step MDP decision log
-- `{tier}_{mode}_uncertainty_log.csv` — POMDP belief uncertainty (POMDP mode only)
-- `{tier}_{mode}_metrics.csv` — Mesa `DataCollector` time series
-- `{tier}_{mode}_snapshots.csv` — per-agent, per-step position/state snapshots
+- `summary_table.csv` : one row per tier per mode (conflicts, TFR breaches, timing, etc.)
+- `tier_sample_seedN.csv` : which callsigns were sampled into each tier
+- `{tier}_{mode}_conflicts.csv` : collision event log
+- `{tier}_{mode}_tfr_metrics.csv` : per-aircraft TFR summary
+- `{tier}_{mode}_mdp_log.csv` : per-step MDP decision log
+- `{tier}_{mode}_uncertainty_log.csv` : POMDP belief uncertainty (POMDP mode only)
+- `{tier}_{mode}_metrics.csv` : Mesa `DataCollector` time series
+- `{tier}_{mode}_snapshots.csv` : per-agent, per-step position/state snapshots
 
 A console summary table and a validation check against known real-world conflicts (e.g. `JBU1052 ↔ SWA219`) print at the end of the run.
