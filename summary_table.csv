@@ -1,0 +1,13 @@
+scenario,label,mode,n_aircraft,steps_run,total_conflicts,peak_conflicts,tfr_breaches,tfr_warnings,avg_min_tfr_dist_nm,aircraft_entered_tfr,wall_time_s,sample_seed
+tier_50,Density Tier — 50 aircraft,baseline,50,8906,233,122,26902,2643,46.928,17,196.2,42
+tier_50,Density Tier — 50 aircraft,mdp_vi,50,8906,0,0,22900,126,248.989,0,4851.1,42
+tier_50,Density Tier — 50 aircraft,pomdp,50,8906,0,0,6042,1103,63.674,10,8961.5,42
+tier_75,Density Tier — 75 aircraft,baseline,75,16016,600,323,49149,4277,32.278,26,208.4,42
+tier_75,Density Tier — 75 aircraft,mdp_vi,75,16016,0,0,58600,152,247.258,0,12100.5,42
+tier_75,Density Tier — 75 aircraft,pomdp,75,16016,0,0,18519,1601,63.103,12,17472.7,42
+tier_90,Density Tier — 90 aircraft,baseline,90,16016,816,429,53773,4821,38.379,30,263.1,42
+tier_90,Density Tier — 90 aircraft,mdp_vi,90,16016,0,0,96586,231,247.337,0,15762.4,42
+tier_90,Density Tier — 90 aircraft,pomdp,90,16016,0,0,10472,1681,69.74,13,17629.8,42
+tier_all,Density Tier — 118 aircraft,baseline,118,16016,1235,637,78319,6651,46.82,42,455.1,42
+tier_all,Density Tier — 118 aircraft,mdp_vi,118,16016,0,0,153744,400,236.112,1,25554.2,42
+tier_all,Density Tier — 118 aircraft,pomdp,118,16016,0,0,18910,3846,73.731,23,28630.2,42

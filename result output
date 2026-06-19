@@ -1,0 +1,150 @@
+  Loading flight data …
+================================================================
+  Combined TFR + Collision Avoidance Scenario Runner
+  Group A (TFR) + Group B (Collision)
+================================================================
+  Data dir   : /home/arora/Desktop/MDP_Project/MDP_Project-code/dats
+  TFR file   : /home/arora/Desktop/MDP_Project/MDP_Project-code/TFR_Lat_Lon.xlsx
+  Tiers      : ['tier_50', 'tier_75', 'tier_90', 'tier_all']  (sizes (50, 75, 90, None))
+  Sample seed: 42  (change with --seed N for a different random sample)
+  Total CSVs : 118 aircraft available
+  Mode       : all
+  Output     : scenario_results_combined/
+
+  To switch to paper tiers (10/50/100/146), set in source:
+      SCENARIO_SIZES = (10, 50, 100, None)
+
+  Solvers trained once and cached across tiers (Fix 2).
+  Solver cache cleared.
+
+──────────────────────────────────────────────────────────────
+  Tier     : Density Tier — 50 aircraft
+  Aircraft : ['AAL1026', 'AAL1511', 'AAL1613', 'AAL165', 'AAL1821', 'AAL2733', 'AAL714', 'AAL9601', 'AAL972', 'AJT8313', 'CMP298', 'CMP349', 'ENY3814', 'FFT1418', 'FFT161', 'FFT3378', 'FFT3470', 'N453QS', 'NAC802', 'NAC811', 'NKS1155', 'NKS1171', 'NKS1210', 'NKS1846', 'NKS1847', 'NKS1904', 'NKS2012', 'NKS210', 'NKS271', 'NKS272', 'NKS2801', 'NKS3010', 'NKS939', 'NKS956', 'SHH3006', 'TXG403', 'UAL1020', 'UAL1058', 'UAL1059', 'UAL1457', 'UAL1739', 'UAL1848', 'UAL1927', 'UAL1956', 'UAL2657', 'UAL2662', 'UAL496T', 'UAL723', 'VIV560', 'XLS500']
+──────────────────────────────────────────────────────────────
+  [BASELINE] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  [BASELINE] done — 8906 steps | conflicts=233 | TFR breaches=26902 | 196.2s
+  [MDP_VI] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  Training Group A — Value Iteration …
+  Building MDP model: |S|=3200, |A|=7, K=4
+  Value iteration converged in 485 iterations (delta=9.80e-04).
+  Training Group A — Q-Learning …
+  Q-learning training: 25000 episodes x 150 steps (biased start-state sampling)
+  Q-learning complete. States visited: 208/3200
+  Group A — POMDP solver ready (uses VI policy + belief state).
+  [MDP_VI] done — 8906 steps | conflicts=0 | TFR breaches=22900 | 4851.1s
+  → conflict reduction : +233 (+100%) ↓
+  → TFR breach reduction : +4002 (+15%) ↓
+  [POMDP] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [POMDP] done — 8906 steps | conflicts=0 | TFR breaches=6042 | 8961.5s
+  → conflict reduction : +233 (+100%) ↓
+  → TFR breach reduction : +20860 (+78%) ↓
+
+──────────────────────────────────────────────────────────────
+  Tier     : Density Tier — 75 aircraft
+  Aircraft : ['AAL1026', 'AAL1028', 'AAL1465', 'AAL1511', 'AAL1613', 'AAL165', 'AAL1821', 'AAL1856', 'AAL217R', 'AAL2541', 'AAL2733', 'AAL324', 'AAL714', 'AAL9601', 'AAL967', 'AAL972', 'AJT8313', 'CMP298', 'CMP349', 'ENY3689', 'ENY3814', 'ENY4071', 'FFT1418', 'FFT161', 'FFT1737', 'FFT2284', 'FFT3378', 'FFT3470', 'FFT4879', 'GXA401', 'N453QS', 'NAC802', 'NAC810', 'NAC811', 'NKS1155', 'NKS1171', 'NKS1210', 'NKS1562', 'NKS1564', 'NKS1708', 'NKS1846', 'NKS1847', 'NKS1904', 'NKS2012', 'NKS210', 'NKS271', 'NKS272', 'NKS2801', 'NKS3010', 'NKS687', 'NKS797', 'NKS939', 'NKS956', 'SHH3006', 'SWA4490', 'TXG403', 'UAL1020', 'UAL1058', 'UAL1059', 'UAL1167', 'UAL1457', 'UAL1739', 'UAL1795', 'UAL1848', 'UAL1927', 'UAL1956', 'UAL2162', 'UAL2245', 'UAL2657', 'UAL2662', 'UAL413', 'UAL496T', 'UAL723', 'VIV560', 'XLS500']
+──────────────────────────────────────────────────────────────
+  [BASELINE] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  [BASELINE] done — 16016 steps | conflicts=600 | TFR breaches=49149 | 208.4s
+  [MDP_VI] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [MDP_VI] done — 16016 steps | conflicts=0 | TFR breaches=58600 | 12100.5s
+  → conflict reduction : +600 (+100%) ↓
+  → TFR breach reduction : -9451 (-19%) ↑
+  [POMDP] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [POMDP] done — 16016 steps | conflicts=0 | TFR breaches=18519 | 17472.7s
+  → conflict reduction : +600 (+100%) ↓
+  → TFR breach reduction : +30630 (+62%) ↓
+
+──────────────────────────────────────────────────────────────
+  Tier     : Density Tier — 90 aircraft
+  Aircraft : ['AAL1014', 'AAL1026', 'AAL1028', 'AAL1465', 'AAL1511', 'AAL1613', 'AAL165', 'AAL1821', 'AAL1856', 'AAL217R', 'AAL2541', 'AAL2733', 'AAL324', 'AAL368', 'AAL510', 'AAL714', 'AAL9601', 'AAL967', 'AAL972', 'AJT8313', 'CMP298', 'CMP349', 'ENY3689', 'ENY3814', 'ENY4071', 'FFT1418', 'FFT161', 'FFT1737', 'FFT2284', 'FFT3378', 'FFT3470', 'FFT4426', 'FFT4879', 'GXA401', 'N453QS', 'NAC802', 'NAC810', 'NAC811', 'NKS1155', 'NKS1171', 'NKS1210', 'NKS1336', 'NKS1562', 'NKS1564', 'NKS1576', 'NKS1708', 'NKS1846', 'NKS1847', 'NKS1904', 'NKS2012', 'NKS210', 'NKS271', 'NKS272', 'NKS2801', 'NKS3010', 'NKS687', 'NKS797', 'NKS939', 'NKS956', 'SHH3006', 'SWA4490', 'SWA575', 'TXG403', 'UAL1020', 'UAL1058', 'UAL1059', 'UAL1167', 'UAL1457', 'UAL1563', 'UAL1630', 'UAL1739', 'UAL1795', 'UAL1848', 'UAL1927', 'UAL1956', 'UAL2105', 'UAL2162', 'UAL2245', 'UAL2247', 'UAL2261', 'UAL2620', 'UAL2657', 'UAL2662', 'UAL413', 'UAL496T', 'UAL584', 'UAL723', 'UAL759', 'VIV560', 'XLS500']
+──────────────────────────────────────────────────────────────
+  [BASELINE] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  [BASELINE] done — 16016 steps | conflicts=816 | TFR breaches=53773 | 263.1s
+  [MDP_VI] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [MDP_VI] done — 16016 steps | conflicts=0 | TFR breaches=96586 | 15762.4s
+  → conflict reduction : +816 (+100%) ↓
+  → TFR breach reduction : -42813 (-80%) ↑
+  [POMDP] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [POMDP] done — 16016 steps | conflicts=0 | TFR breaches=10472 | 17629.8s
+  → conflict reduction : +816 (+100%) ↓
+  → TFR breach reduction : +43301 (+81%) ↓
+
+──────────────────────────────────────────────────────────────
+  Tier     : Density Tier — 118 aircraft
+  Aircraft : ['AAL1014', 'AAL1026', 'AAL1028', 'AAL1341', 'AAL1347', 'AAL1465', 'AAL1511', 'AAL1613', 'AAL165', 'AAL1821', 'AAL1856', 'AAL2171', 'AAL217R', 'AAL2217', 'AAL2230', 'AAL2541', 'AAL2733', 'AAL3149', 'AAL324', 'AAL368', 'AAL510', 'AAL714', 'AAL9601', 'AAL967', 'AAL972', 'AAL987', 'AJT8313', 'AJT8541', 'AJT862', 'CMP100', 'CMP298', 'CMP334', 'CMP349', 'ENY3689', 'ENY3814', 'ENY3954', 'ENY4071', 'FFT1418', 'FFT161', 'FFT1737', 'FFT2284', 'FFT3378', 'FFT3470', 'FFT4426', 'FFT4879', 'GXA401', 'N453QS', 'NAC802', 'NAC810', 'NAC811', 'NKS1155', 'NKS1171', 'NKS1210', 'NKS1336', 'NKS1498', 'NKS1562', 'NKS1564', 'NKS1576', 'NKS1708', 'NKS1846', 'NKS1847', 'NKS1904', 'NKS2012', 'NKS210', 'NKS257', 'NKS271', 'NKS272', 'NKS2801', 'NKS3010', 'NKS352', 'NKS687', 'NKS693', 'NKS797', 'NKS939', 'NKS956', 'PXG210', 'SHH3006', 'SHH906', 'SWA4490', 'SWA575', 'TXG403', 'UAL1019', 'UAL1020', 'UAL1056', 'UAL1058', 'UAL1059', 'UAL1114', 'UAL1167', 'UAL1457', 'UAL1563', 'UAL1630', 'UAL1692', 'UAL1739', 'UAL1795', 'UAL1809', 'UAL1848', 'UAL1927', 'UAL1956', 'UAL2105', 'UAL2162', 'UAL2215', 'UAL2245', 'UAL2247', 'UAL2261', 'UAL2311', 'UAL2620', 'UAL2657', 'UAL2662', 'UAL413', 'UAL496', 'UAL496T', 'UAL584', 'UAL723', 'UAL759', 'UAL774', 'UPS6335', 'VIV560', 'XLS500']
+──────────────────────────────────────────────────────────────
+  [BASELINE] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  [BASELINE] done — 16016 steps | conflicts=1235 | TFR breaches=78319 | 455.1s
+  [MDP_VI] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [MDP_VI] done — 16016 steps | conflicts=0 | TFR breaches=153744 | 25554.2s
+  → conflict reduction : +1235 (+100%) ↓
+  → TFR breach reduction : -75425 (-96%) ↑
+  [POMDP] running …
+  TFR loaded: 8 vertices, centroid (24.530, -81.167), mode=raw
+  ✓ Reusing cached Group A solvers (key=(8, 24.5297, -81.1667))
+  [POMDP] done — 16016 steps | conflicts=0 | TFR breaches=18910 | 28630.2s
+  → conflict reduction : +1235 (+100%) ↓
+  → TFR breach reduction : +59409 (+76%) ↓
+
+====================================================================================
+  TIER                       MODE         AC STEPS   COLL  PEAK  TFR-B  TFR-W  MIN-TFR    TIME
+------------------------------------------------------------------------------------
+                                                     evts   sim   brch   warn       nm       s
+====================================================================================
+  Density Tier — 50 aircraft baseline     50  8906    233   122  26902   2643     46.9  196.2s
+                             mdp_vi       50  8906      0     0  22900    126    249.0 4851.1s
+                             pomdp        50  8906      0     0   6042   1103     63.7 8961.5s
+                             → MDP saved                 +233        +4002                
+                                                    +100%         +15%
+                             → POMDP saved                 +233       +20860                
+                                                    +100%         +78%
+
+  Density Tier — 75 aircraft baseline     75 16016    600   323  49149   4277     32.3  208.4s
+                             mdp_vi       75 16016      0     0  58600    152    247.3 12100.5s
+                             pomdp        75 16016      0     0  18519   1601     63.1 17472.7s
+                             → MDP saved                 +600        -9451                
+                                                    +100%         -19%
+                             → POMDP saved                 +600       +30630                
+                                                    +100%         +62%
+
+  Density Tier — 90 aircraft baseline     90 16016    816   429  53773   4821     38.4  263.1s
+                             mdp_vi       90 16016      0     0  96586    231    247.3 15762.4s
+                             pomdp        90 16016      0     0  10472   1681     69.7 17629.8s
+                             → MDP saved                 +816       -42813                
+                                                    +100%         -80%
+                             → POMDP saved                 +816       +43301                
+                                                    +100%         +81%
+
+  Density Tier — 118 aircraft baseline    118 16016   1235   637  78319   6651     46.8  455.1s
+                             mdp_vi      118 16016      0     0 153744    400    236.1 25554.2s
+                             pomdp       118 16016      0     0  18910   3846     73.7 28630.2s
+                             → MDP saved                +1235       -75425                
+                                                    +100%         -96%
+                             → POMDP saved                +1235       +59409                
+                                                    +100%         +76%
+
+====================================================================================
+  COLL=collision events  PEAK=peak simultaneous  TFR-B=TFR breach steps
+  TFR-W=TFR warning steps  MIN-TFR=avg min distance to TFR edge
+
+── Validation: known conflict detection ──────────────────────────────
+
+  Results saved → scenario_results_combined/
+
