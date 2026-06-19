@@ -1,29 +1,13 @@
 # MDP Air Traffic Simulation
 
-An agent-based simulation of real air traffic that evaluates two safety problems side by side:
+## Project Description 
+Temporary Flight Restrictions (TFRs) are established to create protected airspace regions surrounding launch trajectory. Commercial aircraft must avoid entering restricted zones, maintain safe separation, and minimize delay and fuel consumption. Traditional rule-based rerouting method relying on deterministic procedures that may not optimally balance safety and efficiency under uncertainty. However, real-world operations involve significant uncertainties, including surveillance noise (e.g. ADS-B inaccuracies in position and velocity, or radar latency), weather disturbances, and unpredictable aircraft intent.
 
-- **TFR avoidance** — keeping aircraft clear of Temporary Flight Restriction zones (Value Iteration, Q-Learning, and POMDP solvers)
-- **Collision avoidance** — detecting and resolving aircraft conflicts (ACAS-X-style MDP and SARSOP-style POMDP solvers)
+This project is an integrated agent-based air traffic simulation framework that addresses collision avoidance and Temporary Flight Restriction (TFR) avoidance in a single decision-making process. It implements baseline, MDP-based and POMDP-based controllers for handling air traffic conflicts for different traffic densities. 
 
 Real flight tracks (from FlightRadar24) are replayed through a [Mesa](https://mesa.readthedocs.io/) agent-based model, and each aircraft can either fly its recorded path (`baseline` mode) or be controlled by one of the trained MDP/POMDP policies. The runner compares conflict counts and TFR breaches across both approaches at increasing traffic densities.
 
-## How the pieces fit together
 
-| File | Role |
-|---|---|
-| `air_traffic_model_combined.py` | Merged Mesa model — combines TFR avoidance and collision avoidance into one simulation |
-| `aircraft_agent_combined.py` | Per-aircraft Mesa agent; queries the TFR and collision solvers each step |
-| `air_traffic_abm.py` | Original collision-avoidance model + flight data loader (`load_flight_data`) |
-| `mdp.py` | TFR polygon loading + Value Iteration / Q-Learning / POMDP solvers (TFR avoidance) |
-| `mdp_collision_env.py` | `CollisionMDP` / `CollisionPOMDP` environments (collision avoidance) |
-| `conflict_detection.py` | `ConflictDetector` — KD-tree-based separation/conflict checking |
-| `reward_combined.py` | Reward functions used by the solvers |
-| `scenario_runner_combined.py` | Main entry point — runs baseline vs. MDP vs. POMDP across density tiers and writes results |
-| `baseline_analysis_combined.py` | Analysis of the unmodified baseline replay (used to validate known real-world conflicts) |
-| `parallel_runner.py` | Runs multiple scenarios/tiers in parallel |
-| `TFR_Lat_Lon.xlsx` | TFR zone geometry (lat/lon polygon) |
-| `dats/` | Folder of per-flight FlightRadar24 CSVs (simulation input) |
-| `Validation data (FlightRader24)/` | Reference data used to validate detected conflicts against real events |
 
 ## Requirements
 
@@ -34,9 +18,6 @@ Real flight tracks (from FlightRadar24) are replayed through a [Mesa](https://me
 pip install mesa numpy pandas openpyxl
 ```
 
-`openpyxl` is required by `pandas` to read the `.xlsx` TFR file.
-
-> Note: there's no `requirements.txt` in the repo yet — the import list above (`mesa`, `numpy`, `pandas`) is gathered from the source files. Add a `requirements.txt` with these if you want a one-line install.
 
 ## Setup
 
@@ -84,18 +65,3 @@ Results are written to the `--out` directory (default `scenario_results_combined
 - `{tier}_{mode}_snapshots.csv` — per-agent, per-step position/state snapshots
 
 A console summary table and a validation check against known real-world conflicts (e.g. `JBU1052 ↔ SWA219`) print at the end of the run.
-
-## Quick smoke test
-
-`air_traffic_model_combined.py` can also be run directly for a fast sanity check (requires a `flight_data/` folder alongside it):
-
-```bash
-python air_traffic_model_combined.py
-```
-
-This runs `baseline` and `mdp_vi` modes once and prints a combined safety summary.
-
-## Notes
-
-- The repo's default branch shows no description and a placeholder `README.md`; the actual code lives on the **`code`** branch — make sure to check it out.
-- Solvers (VI/Q-Learning/POMDP) are cached in-process per TFR geometry, so re-running multiple tiers in one invocation doesn't retrain from scratch each time.
