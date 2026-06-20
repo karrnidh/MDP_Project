@@ -5,7 +5,7 @@ Temporary Flight Restrictions (TFRs) are established to create protected airspac
 
 This project is an integrated agent-based air traffic simulation framework that addresses collision avoidance and Temporary Flight Restriction (TFR) avoidance in a single decision-making process. It implements baseline, MDP-based and POMDP-based controllers for handling air traffic conflicts for different traffic densities. 
 
-Real flight tracks (from FlightRadar24) are replayed through a [Mesa](https://mesa.readthedocs.io/) agent-based model, and each aircraft can either fly its recorded path (`baseline` mode) or be controlled by one of the trained MDP/POMDP policies. The runner compares conflict counts and TFR breaches across both approaches at increasing traffic densities.
+Real flight tracks are replayed through a [Mesa](https://mesa.readthedocs.io/) agent-based model, and each aircraft can either fly its recorded path (`baseline` mode) or be controlled by one of the trained MDP/POMDP policies. The runner compares conflict counts and TFR breaches across both approaches at increasing traffic densities.
 
 
 
